@@ -1,6 +1,6 @@
 //const e = require("express");
 
-
+const socket = io();
  // Inicializa el cliente Socket.IO
 
 document.addEventListener("DOMContentLoaded", () => {
