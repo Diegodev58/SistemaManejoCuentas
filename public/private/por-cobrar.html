@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Por Cobrar - Panel de Administración</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Barra lateral de navegación -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2>Admin Panel</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Panel General</a></li>
+                <li><a href="pagos.html">Pagos</a></li>
+                <li class="active"><a href="por-cobrar.html">Por Cobrar</a></li>
+                <li><a href="registro.html">Registro de Personas</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <header>
+            <h1>Cuentas por Cobrar</h1>
+            <div class="user-info">
+                <span>Admin</span>
+            </div>
+        </header>
+
+        <!-- Formulario para registrar deuda -->
+        <div class="form-container">
+            <h2>Registrar Nueva Deuda</h2>
+            <form id="form-deuda">
+                <div class="form-group">
+                    <label for="usuario-deuda">Usuario:</label>
+                    <select id="usuario-deuda" required>
+                        <!-- Opciones cargadas desde JavaScript -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="monto-deuda">Monto:</label>
+                    <input type="number" id="monto-deuda" min="1" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="concepto">Concepto:</label>
+                    <input type="text" id="concepto" required>
+                </div>
+                <div class="form-group">
+                    <label for="fecha-vencimiento">Fecha de Vencimiento:</label>
+                    <input type="date" id="fecha-vencimiento" required>
+                </div>
+                <button type="submit" class="btn-primary">Registrar Deuda</button>
+            </form>
+        </div>
+
+        <!-- Lista de deudas por cobrar -->
+        <div class="table-container">
+            <h2>Deudas Pendientes</h2>
+            <table id="tabla-deudas-pendientes">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Concepto</th>
+                        <th>Monto</th>
+                        <th>Fecha Vencimiento</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los datos se cargarán desde JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/datos.js"></script>
+    <script src="js/por-cobrar.js"></script>
+</body>
+</html>
+

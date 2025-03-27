@@ -1,0 +1,21 @@
+[
+    {
+        "nombre": "Juan Perez",
+        "telefono": "123456789",
+        "referencia": "Amigo",
+        "Fecha de creacion": "2020-01-01"
+
+    },
+    {
+        "nombre": "Maria Lopez",
+        "telefono": "987654321",
+        "referencia": "Trabajo",
+        "Fecha de creacion": "2020-02-01"
+    },
+    {
+        "nombre": "Pedro Ramirez",
+        "telefono": "456789123",
+        "referencia": "Familia",
+        "Fecha de creacion": "2020-03-01"
+    }
+]

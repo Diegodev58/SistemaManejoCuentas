@@ -1,0 +1,10 @@
+[
+    {
+        "nombre": "Juan",
+        "Articulos": "Anillo",
+        "Cantidad": 2,
+        "precio": 5,
+        "deuda": 10,
+        "fecha": "2020-01-01"
+    }
+]
