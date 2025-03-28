@@ -8,6 +8,8 @@ const path = require('path'); // Módulo para manejar rutas de archivos
 const usuarioController = require('./controllers/usuarioController');
 // Inportar el controlador de clientes (archivo: controllers/clienteController.js)
 const clienteController = require('./controllers/clienteController');
+// Importar el controlador de deudas (archivo: controllers/deudaController.js)
+const deudaController = require('./controllers/deudacontroller');
 const { loadEnvFile } = require('process');
 
 // Crear una instancia de Express y un servidor HTTP
@@ -98,6 +100,13 @@ io.on('connection', (socket) => {
     // (El cliente emite este evento en: public/script.js)
     // Enviar la lista de clientes al cliente que se acaba de con
     
+
+
+
+
+    // Emite las deudas al cliente
+    const deudas = deudaController.leerDeudas();
+    socket.emit('deudas', deudas);
 
 
 

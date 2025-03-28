@@ -6,5 +6,21 @@
         "precio": 5,
         "deuda": 10,
         "fecha": "2020-01-01"
+    },
+    {
+        "nombre": "Maria",
+        "Articulos": "Anillo",
+        "Cantidad": 2,
+        "precio": 5,
+        "deuda": 10,
+        "fecha": "2020-02-01"
+    },
+    {
+        "nombre": "Pedro",
+        "Articulos": "Anillo",
+        "Cantidad": 2,
+        "precio": 5,
+        "deuda": 10,
+        "fecha": "2020-03-01"
     }
 ]
