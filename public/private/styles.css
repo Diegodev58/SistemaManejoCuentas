@@ -228,3 +228,43 @@ table tbody tr:hover {
   }
 }
 
+#buscador {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+#buscador:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+#buscador::placeholder {
+  color: #ccc;
+}
+
+#buscador::-webkit-search-cancel-button {
+  display: none;
+}
+
+#buscado:hover {
+  cursor: pointer;
+}
+
+#btn-buscar {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#btn-buscar:hover {
+  background-color: #2980b9;
+}
