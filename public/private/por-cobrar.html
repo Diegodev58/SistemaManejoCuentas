@@ -37,7 +37,9 @@
             <form id="form-deuda">
                 <div class="form-group">
                     <label for="usuario-deuda">Usuario:</label>
-                    <select id="usuario-deuda" required>
+                    <select id="usuario-deuda" class="select" required>
+                        <option value="Seleciona">Seleciona un Usuario</option>
+
                         <!-- Opciones cargadas desde JavaScript -->
                     </select>
                 </div>
@@ -88,6 +90,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/datos.js"></script>
     <script src="js/por-cobrar.js"></script>
+
 </body>
 </html>
 

@@ -22,6 +22,15 @@ const guardarClientes = (clientes) => {
     }
 };
 
+
+//agregar cliente
+const agregarClientes = (nuevoCliente) => {
+    const clientes = leerClientes();
+    clientes.push(nuevoCliente);
+    guardarClientes(clientes);
+    return nuevoCliente;
+};
+
 //eliminar cliente
 const eliminarCliente = (nombre) => {
     const clientes = leerClientes();
@@ -38,4 +47,6 @@ const eliminarCliente = (nombre) => {
 module.exports = {
     leerClientes,
     guardarClientes,
+    agregarClientes,
+    eliminarCliente,
 };

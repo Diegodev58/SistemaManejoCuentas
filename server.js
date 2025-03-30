@@ -99,8 +99,41 @@ io.on('connection', (socket) => {
     // Escuchar el evento 'registro' desde el cliente
     // (El cliente emite este evento en: public/script.js)
     // Enviar la lista de clientes al cliente que se acaba de con
-    
+    //guectar 
 
+
+    //guar el cliente
+    socket.on('nuevoCliente', (nuevoCliente) => {
+        let estado;
+        // Agregar el nuevo cliente usando la función 'agregarCliente' del controlador
+        // (Definida en: controllers/clienteController.js)
+        //verificar si el cliente ya existe
+        const clientes = clienteController.leerClientes();
+        const clienteExistente = clientes.find((cliente) => cliente.telefono === nuevoCliente.telefono);
+        if (clienteExistente) {
+            console.log('El cliente ya existe:', clienteExistente);
+            estado = false;
+            io.emit('nuevoCliente', estado);
+            return;
+        }
+        //verificar si el cliente tiene todos los datos
+        if (!nuevoCliente.nombre || !nuevoCliente.referencia || !nuevoCliente.fecha) {
+            console.log('Faltan datos del cliente:', nuevoCliente);
+            const clienteAgregado = clienteController.agregarClientes(nuevoCliente);
+            console.log('Nuevo cliente agregado:', clienteAgregado);
+            estado = false;
+        } else {
+            console.log('Todos los datos del cliente:', nuevoCliente);
+            const clienteAgregado = clienteController.agregarClientes(nuevoCliente);
+            console.log('Nuevo cliente agregado:', clienteAgregado);
+            estado = true;
+            
+        }
+        io.emit('nuevoCliente', estado);
+        // Emitir el nuevo cliente a todos los clientes conectados
+        // (Los clientes escuchan este evento en: public/script.js)
+        //io.emit('nuevoCliente', clienteAgregado);
+    });
 
 
 
@@ -108,7 +141,8 @@ io.on('connection', (socket) => {
     const deudas = deudaController.leerDeudas();
     socket.emit('deudas', deudas);
 
-
+    // emitir cleintes al cliente
+    socket.emit('clientes', clientes);
 
 
 });

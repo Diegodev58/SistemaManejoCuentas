@@ -5,14 +5,14 @@ const socket = io();
 
 document.addEventListener("DOMContentLoaded", () => {
   // Referencias a elementos del DOM
-  const loginForm = document.getElementById("login-form")
-  const emailInput = document.getElementById("email")
-  const passwordInput = document.getElementById("password")
-  const emailError = document.getElementById("email-error")
-  const passwordError = document.getElementById("password-error")
-  const togglePassword = document.getElementById("toggle-password")
-  const eyeIcon = document.querySelector(".eye-icon")
-  const eyeOffIcon = document.querySelector(".eye-off-icon")
+  const loginForm = document.getElementById("login-form");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const emailError = document.getElementById("email-error");
+  const passwordError = document.getElementById("password-error");
+  const togglePassword = document.getElementById("toggle-password");
+  const eyeIcon = document.querySelector(".eye-icon");
+  const eyeOffIcon = document.querySelector(".eye-off-icon");
 
   // Función para validar email
   function validateEmail(email) {

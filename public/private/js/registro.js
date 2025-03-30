@@ -2,7 +2,7 @@ const socket = io();
 
 
 // Obtener el formulario de registro
-const formularioRegistro = document.getElementById('formularioRegistro');
+const formularioRegistro = document.querySelector('#form-registro');
 
 // Escuchar el evento 'registro' desde el servidor 
 //mostramos los datos del cliente en la tabla
@@ -21,7 +21,7 @@ socket.on('registro', (clientes) => {
         tdNombre.textContent = datas.nombre;
         tdTelefono.textContent = datas.telefono;
         tdReferencia.textContent = datas.referencia;
-        tdFecha.textContent = datas['Fecha de creacion'];
+        tdFecha.textContent = datas.fecha;
         tdAcciones.innerHTML = `
             <button class="btn btn-danger" data-id="${datas.nombre}">Eliminar</button>
         `;
@@ -35,3 +35,44 @@ socket.on('registro', (clientes) => {
         demo.appendChild(tr);
     }
 });
+
+
+
+// Escuchar el evento 'nuevoCliente' desde el servidor
+// (El servidor emite este evento en: server.js)
+formularioRegistro.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    // Obtener los datos del formulario
+    const nombre = document.querySelector('#nombre').value;
+    const referencia = document.querySelector('#Referencia').value;
+    const telefono = document.querySelector('#telefono').value;
+    const email = document.querySelector('#email').value;
+    const dirreccion = document.querySelector('#direccion').value;
+
+    const nuevoCliente = 
+        {
+            "nombre": nombre,
+            "referencia": referencia,
+            "telefono": telefono,
+            "email": email,
+            "dirreccion": dirreccion,
+            "fecha": new Date().toLocaleDateString(), 
+        }
+    
+
+    // Crear un objeto con los datos del cliente
+    socket.emit('nuevoCliente', nuevoCliente);
+    formularioRegistro.reset();
+
+    // Mostrar mensaje de éxito
+    socket.on('nuevoCliente', (estado) => {
+        if (estado) {
+            alert('Cliente agregado con éxito');
+        } else {
+            alert('Error al agregar el cliente o el cliente ya existe');
+        }
+    });
+});
+
+
