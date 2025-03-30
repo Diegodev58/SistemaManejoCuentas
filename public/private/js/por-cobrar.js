@@ -1,5 +1,11 @@
+//const e = require("express");
 
 const socket = io(); // Conectar al servidor Socket.IO
+
+const formularioDeuda = document.querySelector('#form-deuda'); // Obtener el formulario de deuda
+
+
+
 
 // eschuchams los usuarios registrados para el select
 socket.on('clientes', (clientes) => {
@@ -34,3 +40,37 @@ socket.on('deudas', (deudas) => {
             document.getElementById('tabla-deudas-pendientes').appendChild(row);
         }
     });
+
+formularioDeuda.addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+    // Obtener los datos del formulario
+    const usuario = document.querySelector('#usuario-deuda').value;
+    const cantidad = document.querySelector('.cantidad').value;
+    const monto = document.querySelector('.monto').value;
+    const concepto = document.querySelector('#concepto').value;
+    const total = cantidad * monto; // Calcular el total multiplicando cantidad por monto
+    const fecha = new Date().toLocaleDateString(); // Obtener la fecha actual
+
+    // Crear un objeto con los datos de la deuda
+    const nuevaDeuda = {
+        nombre: usuario,
+        Articulos: concepto,
+        Cantidad: cantidad,
+        precio: monto + '$',
+        deuda: total + '$',
+        fecha: fecha
+    };
+
+    // Enviar la deuda al servidor
+    socket.emit('nuevaDeuda', nuevaDeuda);
+
+    // Limpiar el formulario
+    formularioDeuda.reset();
+    if (nuevaDeuda) {
+        alert('Deuda registrada con exito');
+    }else {
+        alert('Error al registrar la deuda');
+
+
+    }      } 
+);

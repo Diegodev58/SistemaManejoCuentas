@@ -11,6 +11,7 @@ const clienteController = require('./controllers/clienteController');
 // Importar el controlador de deudas (archivo: controllers/deudaController.js)
 const deudaController = require('./controllers/deudacontroller');
 const { loadEnvFile } = require('process');
+const e = require('express');
 
 // Crear una instancia de Express y un servidor HTTP
 const app = express();
@@ -93,6 +94,11 @@ io.on('connection', (socket) => {
             });
         }
     });
+
+
+    /**
+     * Parte de clientes
+     */
     // mostrar los clientes
    const clientes = clienteController.leerClientes();
     socket.emit('registro', clientes);
@@ -135,11 +141,46 @@ io.on('connection', (socket) => {
         //io.emit('nuevoCliente', clienteAgregado);
     });
 
-
+    /**
+     * Parte de deudas
+     */
 
     // Emite las deudas al cliente
     const deudas = deudaController.leerDeudas();
     socket.emit('deudas', deudas);
+
+    // Escuchar el evento 'nuevaDeuda' desde el cliente
+    // (El cliente emite este evento en: public/script.js)
+    socket.on('nuevaDeuda', (nuevaDeuda) => {
+        let estado;
+        // Verificar si la deuda tiene todos los datos necesarios
+        function verificarDeuda (nuevaDeuda) {
+            if (!nuevaDeuda.nombre || !nuevaDeuda.Articulos || !nuevaDeuda.Cantidad || !nuevaDeuda.precio) {
+                console.log('Faltan datos de la deuda:', nuevaDeuda);
+                estado = false;
+                return;
+            }else {
+                console.log('Todos los datos de la deuda:', nuevaDeuda);
+                estado = true;
+                  // Agregar la nueva deuda usando la función 'agregarDeudas' del controlador
+                // (Definida en: controllers/deudaController.js)
+                const deudaAgregada = deudaController.agregarDeuda(nuevaDeuda);
+                console.log('Nueva deuda agregada:', deudaAgregada);
+                // Emitir la nueva deuda a todos los clientes conectados
+                // (Los clientes escuchan este evento en: public/script.js)
+                io.emit('nuevaDeuda', deudaAgregada);
+                return true;
+            }
+
+        }
+        // Verificar la deuda
+        verificarDeuda(nuevaDeuda);
+        io.emit('nuevaDeuda', estado);
+
+
+      
+    })
+
 
     // emitir cleintes al cliente
     socket.emit('clientes', clientes);

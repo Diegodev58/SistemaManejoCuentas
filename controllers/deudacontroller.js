@@ -19,11 +19,17 @@ const guardarDeudas = (deudas) => {
         console.error('Error guardando el archivo de deudas:', err);
     }
 }
-
+/// Función para agregar una nueva deuda
+const agregarDeuda = (deuda) => {
+    const deudas = leerDeudas();
+    deudas.push(deuda);
+    guardarDeudas(deudas);
+}
 
 
 
 module.exports = {
     leerDeudas,
     guardarDeudas,
+    agregarDeuda,
 };
