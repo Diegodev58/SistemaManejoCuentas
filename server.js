@@ -117,7 +117,7 @@ io.on('connection', (socket) => {
         // (Definida en: controllers/clienteController.js)
         //verificar si el cliente ya existe
         const clientes = clienteController.leerClientes();
-        const clienteExistente = clientes.find((cliente) => cliente.telefono === nuevoCliente.telefono);
+        const clienteExistente = clientes.find((cliente) => cliente.nombre === nuevoCliente.nombre);
         if (clienteExistente) {
             console.log('El cliente ya existe:', clienteExistente);
             estado = false;
@@ -227,6 +227,24 @@ io.on('connection', (socket) => {
         // Agregar el nuevo pago usando la función 'agregarPago' del controlador
         // (Definida en: controllers/pagoController.js)
         
+
+
+    //*** Parte de la tabla **/
+    // Escuchar el evento 'nuevoPago' desde el cliente
+    // (El cliente emite este evento en: public/script.js)
+    const pagostotales = pagoController.leerPagos();
+    const deudastotales = deudaController.leerDeudas();
+    const clientestotales = clienteController.leerClientes();
+    const comparacion = {
+        pagos: pagostotales,
+        deudas: deudastotales,
+        clientes: clientestotales
+    };
+    socket.emit('comparacion', comparacion);
+    
+
+
+
     })
 
 

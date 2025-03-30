@@ -1,34 +1,26 @@
 [
   {
-    "nombre": "Juan",
-    "Articulos": "Anillo",
-    "Cantidad": 2,
-    "precio": 5,
-    "deuda": 10,
-    "fecha": "2020-01-01"
+    "nombre": "Ana",
+    "Articulos": "anillo",
+    "Cantidad": "3",
+    "precio": "2.5",
+    "deuda": "7.5",
+    "fecha": "30/3/2025"
   },
   {
-    "nombre": "Maria",
-    "Articulos": "Anillo",
-    "Cantidad": 2,
-    "precio": 5,
-    "deuda": 10,
-    "fecha": "2020-02-01"
+    "nombre": "diego",
+    "Articulos": "Pulceras",
+    "Cantidad": "2",
+    "precio": "4",
+    "deuda": "8",
+    "fecha": "30/3/2025"
   },
   {
-    "nombre": "Pedro",
-    "Articulos": "Anillo",
-    "Cantidad": 2,
-    "precio": 5,
-    "deuda": 10,
-    "fecha": "2020-03-01"
-  },
-  {
-    "nombre": "test",
-    "Articulos": "deuda",
-    "Cantidad": "5",
-    "precio": "1.6$",
-    "deuda": "8$",
-    "fecha": "29/3/2025"
+    "nombre": "yane",
+    "Articulos": "demo",
+    "Cantidad": "1",
+    "precio": "7.5",
+    "deuda": "7.5",
+    "fecha": "30/3/2025"
   }
 ]

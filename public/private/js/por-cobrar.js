@@ -33,8 +33,8 @@ socket.on('deudas', (deudas) => {
                 <td>${deuda.nombre}</td>
                 <td>${deuda.Articulos}</td>
                 <td>${deuda.Cantidad}</td>
-                <td>${deuda.precio}</td>
-                <td>${deuda.deuda}</td>
+                <td>${deuda.precio} $</td>
+                <td>${deuda.deuda} $</td>
                 <td>${deuda.fecha}</td>
             `;
             document.getElementById('tabla-deudas-pendientes').appendChild(row);
@@ -56,8 +56,8 @@ formularioDeuda.addEventListener('submit', (event) => {
         nombre: usuario,
         Articulos: concepto,
         Cantidad: cantidad,
-        precio: monto + '$',
-        deuda: total + '$',
+        precio: monto ,
+        deuda: total ,
         fecha: fecha
     };
 

@@ -1,5 +1,4 @@
-
-
+// Este archivo es el cliente de la aplicación de pagos
 const Socket = io()
 
 const demo = document.getElementById('demo')
@@ -17,7 +16,7 @@ Socket.on('pagos', (pagos) => {
         const tdDescripcion = document.createElement('td');
 
         tdUsuario.textContent = datas.nombre;
-        tdMonto.textContent = datas.pago;
+        tdMonto.textContent = datas.pago + ' $';
         tdFecha.textContent = datas.fecha;
         tdReferencia.textContent = datas.referencia;
         tdDescripcion.textContent = datas.descripcion;
@@ -62,7 +61,7 @@ formulariopago.addEventListener('submit', (e) => {
     }
     const nuevoPago = {
         nombre: usuario,
-        pago: Number(monto) + '$',
+        pago: Number(monto),
         fecha: new Date().toLocaleDateString(),
         referencia: referencia,
         descripcion: descripcion
