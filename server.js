@@ -10,6 +10,8 @@ const usuarioController = require('./controllers/usuarioController');
 const clienteController = require('./controllers/clienteController');
 // Importar el controlador de deudas (archivo: controllers/deudaController.js)
 const deudaController = require('./controllers/deudacontroller');
+// Importar el controlador de pagos (archivo: controllers/pagoController.js)
+const pagoController = require('./controllers/pagoController');
 const { loadEnvFile } = require('process');
 const e = require('express');
 
@@ -183,10 +185,53 @@ io.on('connection', (socket) => {
 
 
     // emitir cleintes al cliente
+    
+    /** 
+     * Parte de pagos
+     */
+    // emite los clientes al cliente
     socket.emit('clientes', clientes);
+    // Emite los pagos al cliente
+    const pagos = pagoController.leerPagos();
+    socket.emit('pagos', pagos);
+
+    // Escuchar el evento 'nuevoPago' desde el cliente
+    // (El cliente emite este evento en: public/script.js)
+    socket.on('nuevoPago', (nuevoPago) => {
+        let estado;
+    
+        // Verificar si el pago tiene todos los datos necesarios
+        function verificarPago (nuevoPago) {
+            if (!nuevoPago.nombre || !nuevoPago.pago || !nuevoPago.referencia) { // Cambiar cliente y monto por nombre y pago
+                console.log('Faltan datos del pago:', nuevoPago);
+                estado = false;
+                return false; // Devolver false para indicar error
+            } else {
+                console.log('Todos los datos del pago:', nuevoPago);
+                estado = true;
+                return true; // Devolver true para indicar éxito
+            }
+        }
+    
+        // Verificar el pago
+        if (verificarPago(nuevoPago)) { // Usar el valor de retorno de verificarPago
+            // Agregar el nuevo pago usando la función 'agregarPago' del controlador
+            const pagoAgregado = pagoController.agregarPago(nuevoPago);
+            console.log('Nuevo pago agregado:', pagoAgregado);
+            // Emitir el nuevo pago a todos los clientes conectados
+            io.emit('nuevoPago', pagoAgregado);
+        }
+    
+        io.emit('nuevoPago', estado);
+    });
+        // Agregar el nuevo pago usando la función 'agregarPago' del controlador
+        // (Definida en: controllers/pagoController.js)
+        
+    })
 
 
-});
+
+
 
 
 // Definir la ruta para la página principal

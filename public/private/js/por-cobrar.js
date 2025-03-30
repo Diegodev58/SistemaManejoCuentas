@@ -68,6 +68,7 @@ formularioDeuda.addEventListener('submit', (event) => {
     formularioDeuda.reset();
     if (nuevaDeuda) {
         alert('Deuda registrada con exito');
+        window.location.reload()
     }else {
         alert('Error al registrar la deuda');
 

@@ -1,23 +1,37 @@
 [
-    {
-        "nombre": "Juan",
-        "pago": 500,
-        "fecha": "2020-01-01",
-        "referencia Bancaria": 2522,
-        "descripcion": "Pago de servicios"
-    },
-    {
-        "nombre": "Maria",
-        "pago": 1000,
-        "fecha": "2020-02-01",
-        "referencia Bancaria": 2523,
-        "descripcion": "Pago de servicios"
-    },
-    {
-        "nombre": "Pedro",
-        "pago": 750,
-        "fecha": "2020-03-01",
-        "referencia Bancaria": 2524,
-        "descripcion": "Pago de servicios"
-    }
+  {
+    "nombre": "Juan",
+    "pago": 500,
+    "fecha": "2020-01-01",
+    "referencia": 2522,
+    "descripcion": "Pago de servicios"
+  },
+  {
+    "nombre": "Maria",
+    "pago": 1000,
+    "fecha": "2020-02-01",
+    "referencia": 2523,
+    "descripcion": "Pago de servicios"
+  },
+  {
+    "nombre": "Pedro",
+    "pago": 750,
+    "fecha": "2020-03-01",
+    "referencia": 2524,
+    "descripcion": "Pago de servicios"
+  },
+  {
+    "nombre": "test",
+    "pago": "25$",
+    "fecha": "30/3/2025",
+    "referencia": "2541",
+    "descripcion": "hola"
+  },
+  {
+    "nombre": "test1",
+    "pago": "50$",
+    "fecha": "30/3/2025",
+    "referencia": "2514",
+    "descripcion": "hla1"
+  }
 ]

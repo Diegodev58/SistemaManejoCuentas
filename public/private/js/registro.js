@@ -69,6 +69,7 @@ formularioRegistro.addEventListener('submit', (event) => {
     socket.on('nuevoCliente', (estado) => {
         if (estado) {
             alert('Cliente agregado con éxito');
+            window.location.reload()
         } else {
             alert('Error al agregar el cliente o el cliente ya existe');
         }
