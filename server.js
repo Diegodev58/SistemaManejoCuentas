@@ -12,8 +12,16 @@ const clienteController = require('./controllers/clienteController');
 const deudaController = require('./controllers/deudacontroller');
 // Importar el controlador de pagos (archivo: controllers/pagoController.js)
 const pagoController = require('./controllers/pagoController');
-const { loadEnvFile } = require('process');
-const e = require('express');
+// Importar el controlador de autenticación (archivo: controllers/validar_user.js)
+const { login } = require('./controllers/validar_user.js');
+
+const cookieParser = require('cookie-parser');
+require('express');
+
+
+const dotenv = require('dotenv');
+dotenv.config();
+const cors = require('cors');
 
 // Crear una instancia de Express y un servidor HTTP
 const app = express();
@@ -22,8 +30,26 @@ const server = http.createServer(app);
 // Inicializar Socket.IO y vincularlo al servidor HTTP
 const io = socketIo(server);
 
+app.use(express.json()); // Permite parsear JSON en las solicitudes (middleware integrado de Express)
+app.use(cookieParser()) 
 // Configurar Express para servir archivos estáticos desde la carpeta 'public'
 app.use(express.static('public'));
+
+
+app.use(cors()); // Habilitar CORS
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+} );
+//app.post("/login",login,); 
+app.post("/login", async(req, res) => {
+    const { email, password } = req.body;
+    console.log("Datos recibidos:", email, password);
+    res.json({ mensaje: "Login exitoso" }); // ¡Importante enviar una respuesta!
+  });
+
+
+
+
 
 // Manejar conexiones de Socket.IO
 io.on('connection', (socket) => {
@@ -61,41 +87,17 @@ io.on('connection', (socket) => {
 
     // Enviar la lista de clientes al cliente que se acaba de conectar
     // (El cliente escucha este evento en: public/script.js)
-
+     
     // Escuchar el user y password desde el cliente para el login
     socket.on('enviarComprobar', (enviarComprobar) => {
-        console.log('Datos recibidos para comprobar:', enviarComprobar);
-        
-        // 1. Leer todos los usuarios
-        const usuarios = usuarioController.leerUsuarios();
-        
-        // 2. Buscar si existe un usuario con ese email y contraseña
-        const usuarioEncontrado = usuarios.find(usuario => 
-            usuario.email === enviarComprobar.email && 
-            usuario.password === enviarComprobar.password
-        );
-        
-        // 3. Verificar si se encontró el usuario
-        if(usuarioEncontrado){
-            console.log('Usuario autenticado:', usuarioEncontrado.email);
-            // Emitir confirmación con posibles datos adicionales
-            socket.emit('confirmar', {
-                success: true,
-                message: 'Credenciales correctas',
-                user: {
-                    email: usuarioEncontrado.email,
-                    // No enviar la contraseña por seguridad
-                    rol: usuarioEncontrado.rol || 'user'
-                }
-            });
-        } else {
-            console.log('Autenticación fallida para:', enviarComprobar.email);
-            socket.emit('confirmar', {
-                success: false,
-                message: 'Email o contraseña incorrectos'
-            });
+        function verificarAdmin(email, password) {
+            const admin = login(email, password);
         }
-    });
+        verificarAdmin(enviarComprobar.email, enviarComprobar.password);
+        module.exports = {
+            verificarAdmin
+        }
+    })  
 
 
     /**
@@ -251,27 +253,18 @@ io.on('connection', (socket) => {
 
 
 
-
 // Definir la ruta para la página principal
 
 
 // Definir el puerto en el que correrá el servidor
 const PORT = process.env.PORT || 3000;
 
-// Definir la ruta para la página principal
-// app.get('/', (req, res) => {
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
-}
-);
-// Definir la ruta para la página privada necesario para el login
-app.get('/private', (req, res) => {
-    if (req.session.user) {
-        res.sendFile(path.join(__dirname, 'private', 'index.html'));
-    } else {
-        res.redirect('/');
-    }
-});
+//elementos static
+
+//
+
+
+
    
 
 
