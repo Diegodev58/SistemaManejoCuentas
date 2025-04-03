@@ -41,11 +41,7 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 } );
 //app.post("/login",login,); 
-app.post("/login", async(req, res) => {
-    const { email, password } = req.body;
-    console.log("Datos recibidos:", email, password);
-    res.json({ mensaje: "Login exitoso" }); // ¡Importante enviar una respuesta!
-  });
+app.post("/login", login);
 
 
 
