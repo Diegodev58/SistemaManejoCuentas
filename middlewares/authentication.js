@@ -1,46 +1,27 @@
-const fs = require('fs');
-const path = require('path');
 const jwt = require('jsonwebtoken');
-const { login } = require('../controllers/validar_user.js');
-dotenv = require('dotenv');
+require('dotenv').config();
 
-
-dotenv.config();
-
-function soloAdmin(req, res, next) {
-  const token = req.headers['authorization'];
-  if (!token) {
-    return res.status(403).json({ error: 'Token no proporcionado' });
-  }
-
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return res.status(401).json({ error: 'Token inválido' });
-    }
-    // Verifica si el usuario es administrador
-    if (decoded.role !== 'admin') {
-      return res.status(403).json({ error: 'No tienes permiso para acceder a esta ruta' });
-    }
-    next();
-    return res.redirect("/private/pagos"); // Redirige a la ruta privada si el token es válido y el usuario es admin
-  });
-}
-// Middleware para verificar el token de autenticación
-function verificarToken(req, res, next) {
-  const token = req.headers['authorization'];
+async function Userautenticado(req, res, next) {
+  try {
+    // Obtener el token de las cookies o del header Authorization
+    const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
+    
     if (!token) {
-        return res.status(403).json({ error: 'Token no proporcionado' });
+      return res.status(401).json({ message: 'Acceso no autorizado: Token no proporcionado' });
     }
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-            return res.status(401).json({ error: 'Token inválido' });
-        }
-        req.user = decoded; // Almacena la información del usuario en la solicitud
-        next();
-    });
+
+    // Verificar el token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    
+    // Token válido, continuar
+    next();
+  } catch (error) {
+    // Token inválido o expirado
+    res.clearCookie('token');
+    return res.status(401).json({ message: 'Acceso no autorizado: Token inválido o expirado' });
+  }
 }
 
-module.exports = {
-    soloAdmin,
-    verificarToken
-};
+
+module.exports = Userautenticado;

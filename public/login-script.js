@@ -16,17 +16,17 @@ formularioLogin.addEventListener('submit', async (e) => {
     });
 
     if (!response.ok) {
+      
       const errorData = await response.json(); // Lee el mensaje de error del backend
       throw new Error(errorData.error || "Error en la respuesta del servidor");
+      
     }
 
     const data = await response.json();
-    console.log("Éxito:", data);
-    // Redirige al usuario o muestra un mensaje
-    window.location.href = "/dashboard.html"; // Ejemplo
-
+    console.log(data);
+    window.location.href = 'http://localhost:3000/private/index.html';
+    
   } catch (error) {
-    console.error("Error al enviar datos:", error.message);
-    alert(error.message); // Muestra el error al usuario
+    console.error("Error:", error);
   }
 });
