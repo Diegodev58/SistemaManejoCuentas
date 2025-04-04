@@ -41,7 +41,9 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public'));
+});
 // Ruta privada con autenticación
 app.use('/private', Userautenticado, express.static(path.join(__dirname, 'private')));
 
