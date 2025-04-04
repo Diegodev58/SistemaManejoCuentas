@@ -17,7 +17,8 @@ const { login } = require('./controllers/validar_user');
 const Userautenticado = require('./middlewares/authentication');
 const cookieParser = require('cookie-parser');
 require('express');
-
+// routes
+const router = express.Router();
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -30,23 +31,33 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+// Archivos públicos (sin autenticación)
+// Configuraciones básicas (CORREGIDO)
+
+
+// Archivos públicos (sin autenticación)
+
+
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// Rutas públicas
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "login.html"));
+// Ruta privada con autenticación
+app.use('/private', Userautenticado, express.static(path.join(__dirname, 'private')));
+
+// Ruta para servir el index.html privado
+app.get('/private', Userautenticado, (req, res) => {
+    res.sendFile(path.join(__dirname, 'private', 'index.html'));
 });
 
-app.post("/login", login);
-
-app.post('/logout', (req, res) => {
-  res.clearCookie('token');
-  res.status(200).json({ message: 'Sesión cerrada exitosamente' });
+// Otras rutas...
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-// Rutas privadas (protegidas por autenticación)
-app.use('/private/*', Userautenticado, express.static(path.join(__dirname, "private" )));
+app.post('/login', login);
+
+
 
 
 // Manejar conexiones de Socket.IO

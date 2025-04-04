@@ -9,7 +9,7 @@ formularioLogin.addEventListener('submit', async (e) => {
   console.log(email);
   console.log(password);
   try {
-    const response = await fetch('http://localhost:3000/login', {
+    const response = await fetch('/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(enviarComprobar),
@@ -24,7 +24,7 @@ formularioLogin.addEventListener('submit', async (e) => {
 
     const data = await response.json();
     console.log(data);
-    window.location.href = 'http://localhost:3000/private/index.html';
+    window.location.href = '/private';
     
   } catch (error) {
     console.error("Error:", error);
