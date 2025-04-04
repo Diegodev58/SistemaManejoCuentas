@@ -2,6 +2,13 @@
     { "email": "juan@demo.com",
       "password": "1234567890"  },
 
-    { "email": "ana@example.com" ,
-      "password": "456"  }   
+    { "email": "admin@alaya.db" ,
+      "password": "123admin.2510"  },
+    
+    { "email": "diazana@alaya.db",
+      "password": "1234567890"  },
+    
+    { "email": "diegoa@alaya.db",
+      "password": "1234567890"  }
+
 ]
