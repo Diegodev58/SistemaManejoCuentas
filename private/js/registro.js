@@ -52,10 +52,10 @@ formularioRegistro.addEventListener('submit', (event) => {
 
     const nuevoCliente = 
         {
-            "nombre": nombre,
-            "referencia": referencia,
+            "nombre": nombre.toUpperCase(),
+            "referencia": referencia.toUpperCase(),
             "telefono": telefono,
-            "email": email,
+            "email": email.toUpperCase(),
             "dirreccion": dirreccion,
             "fecha": new Date().toLocaleDateString(), 
         }
