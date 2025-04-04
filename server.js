@@ -50,6 +50,30 @@ app.get('/private', Userautenticado, (req, res) => {
     res.sendFile(path.join(__dirname, 'private', 'index.html'));
 });
 
+app.get('/private/index.html', Userautenticado, (req, res) => {
+    res.sendFile(path.join(__dirname, 'private', 'index.html'));
+});
+
+app.get('/private/pagos.html/*', Userautenticado, (req, res) => {
+    res.sendFile(path.join(__dirname, 'private', 'pagos.html'));
+});
+
+app.get('/private/registro.html/*', Userautenticado, (req, res) => {
+    res.sendFile(path.join(__dirname, 'private', 'registro.html'));
+}
+);
+app.get('/private/deudas.html/*', Userautenticado, (req, res) => {
+    res.sendFile(path.join(__dirname, 'private', 'deudas.html'));
+});
+
+app.get('/private/por-cobrar.html/*', Userautenticado, (req, res) => {
+    res.sendFile(path.join(__dirname, 'private', 'por-cobrar.html'));
+});
+
+
+
+
+
 // Otras rutas...
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
