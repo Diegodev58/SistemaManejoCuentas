@@ -8,25 +8,52 @@ Socket.on('comparacion', comparacion => {
     const tbodydeudas = document.getElementById('tbody-deudas');
     const { deudas, pagos, clientes } = comparacion;
 
+    // Limpiar el tbody antes de agregar nuevos datos
+    tbodydeudas.innerHTML = '';
+
+    // Primero, procesamos los datos para agrupar por cliente
+    const resumenClientes = {};
+
+    // Procesar deudas
+    deudas.forEach(deuda => {
+        if (!resumenClientes[deuda.nombre]) {
+            resumenClientes[deuda.nombre] = {
+                nombre: deuda.nombre,
+                totalDeuda: 0,
+                totalPago: 0
+            };
+        }
+        resumenClientes[deuda.nombre].totalDeuda += Number(deuda.deuda);
+    });
+
+    // Procesar pagos
+    pagos.forEach(pago => {
+        if (!resumenClientes[pago.nombre]) {
+            resumenClientes[pago.nombre] = {
+                nombre: pago.nombre,
+                totalDeuda: 0,
+                totalPago: 0
+            };
+        }
+        resumenClientes[pago.nombre].totalPago += Number(pago.pago);
+    });
+
+    // Ahora generamos las filas para cada cliente
     clientes.forEach(cliente => {
-        deudas.forEach(deuda => {
-            pagos.forEach(pago => {
-                if (cliente.nombre === deuda.nombre && cliente.nombre === pago.nombre) {
-                    // Creamos una fila para cada deuda y pago coincidente
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${cliente.nombre}</td>
-                        <td>${deuda.deuda} $</td>
-                        <td>${pago.pago} $</td>
-                        <td>${Number(deuda.deuda) - Number(pago.pago)} $</td>
-                    `;
-                    tbodydeudas.appendChild(row);
-                }
-            });
-        });
+        if (resumenClientes[cliente.nombre]) {
+            const resumen = resumenClientes[cliente.nombre];
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${resumen.nombre}</td>
+                <td>${resumen.totalDeuda.toFixed(2)} $</td>
+                <td>${resumen.totalPago.toFixed(2)} $</td>
+                <td>${(resumen.totalDeuda - resumen.totalPago).toFixed(2)} $</td>
+                <td><button class="btn btn-danger" id="btn-eliminar">Ver</button></td>
+            `;
+            tbodydeudas.appendChild(row);
+        }
     });
 });
-
 // Ahora Comfiguramos en buscador de clientes   
 const buscador = document.getElementById('buscador');
 const tbodydeudas = document.getElementById('tbody-deudas');

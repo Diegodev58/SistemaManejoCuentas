@@ -22,5 +22,21 @@
     "precio": "7.5",
     "deuda": "7.5",
     "fecha": "30/3/2025"
+  },
+  {
+    "nombre": "ILIANA",
+    "Articulos": "mariguana",
+    "Cantidad": "5",
+    "precio": "7.5",
+    "deuda": 37.5,
+    "fecha": "5/4/2025"
+  },
+  {
+    "nombre": "diego",
+    "Articulos": "mariguana",
+    "Cantidad": "1",
+    "precio": "10",
+    "deuda": 10,
+    "fecha": "5/4/2025"
   }
 ]
