@@ -46,7 +46,9 @@ app.get('/', (req, res) => {
 });
 // Ruta privada con autenticación
 app.use('/private', Userautenticado, express.static(path.join(__dirname, 'private')));
-
+// ruta para server los css y js
+app.use('/private/styles.css', Userautenticado, express.static(path.join(__dirname, 'private')));
+app.use('/private/js', Userautenticado, express.static(path.join(__dirname, 'private', 'js')));
 // Ruta para servir el index.html privado
 app.get('/private', Userautenticado, (req, res) => {
     res.sendFile(path.join(__dirname, 'private', 'index.html'));
