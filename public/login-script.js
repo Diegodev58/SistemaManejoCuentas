@@ -16,7 +16,7 @@ formularioLogin.addEventListener('submit', async (e) => {
     });
 
     if (!response.ok) {
-      
+      alert('Usuario o Clave no son valida')
       const errorData = await response.json(); // Lee el mensaje de error del backend
       throw new Error(errorData.error || "Error en la respuesta del servidor");
       
@@ -28,5 +28,6 @@ formularioLogin.addEventListener('submit', async (e) => {
     
   } catch (error) {
     console.error("Error:", error);
+    alert('Usuario o Clave no son valida')
   }
 });
