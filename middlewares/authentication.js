@@ -7,8 +7,8 @@ async function Userautenticado(req, res, next) {
     const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
     
     if (!token) {
-     
-      return res.status(401).json({ message: 'Acceso no autorizado: Token no proporcionado' });
+       return res.redirect('/login')
+      //return res.status(401).json({ message: 'Acceso no autorizado: Token no proporcionado' });
     }
 
     // Verificar el token
