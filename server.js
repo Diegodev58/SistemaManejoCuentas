@@ -72,7 +72,7 @@ app.get('/private/por-cobrar.html/*', Userautenticado, (req, res) => {
 });
 
 // Ruta para descargar todos los datos como ZIP
-app.get('/data/download-all', (req, res) => {
+app.get('/data/download-all',Userautenticado, (req, res) => {
   const archive = archiver('zip', {
     zlib: { level: 9 } // Máxima compresión
   });
