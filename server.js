@@ -3,7 +3,8 @@ const express = require('express'); // Framework para crear el servidor web
 const http = require('http'); // Módulo para crear un servidor HTTP
 const socketIo = require('socket.io'); // Módulo para manejar conexiones en tiempo real
 const path = require('path'); // Módulo para manejar rutas de archivos
-
+const archiver = require('archiver');
+const fs = require('fs')
 // Importar el controlador de usuarios (archivo: controllers/usuarioController.js)
 const usuarioController = require('./controllers/usuarioController');
 // Inportar el controlador de clientes (archivo: controllers/clienteController.js)
@@ -46,6 +47,7 @@ app.get('/', (req, res) => {
 });
 // Ruta privada con autenticación
 app.use('/private', Userautenticado, express.static(path.join(__dirname, 'private')));
+
 // ruta para server los css y js
 app.use('/private/styles.css', Userautenticado, express.static(path.join(__dirname, 'private')));
 app.use('/private/js', Userautenticado, express.static(path.join(__dirname, 'private', 'js')));
@@ -75,7 +77,38 @@ app.get('/private/por-cobrar.html/*', Userautenticado, (req, res) => {
 });
 
 
-
+app.get('/data/download-all', (req, res) => {
+    const archive = archiver('zip', {
+      zlib: { level: 9 } // Nivel de compresión máximo
+    });
+  
+    // Manejo de errores del archivo ZIP
+    archive.on('error', (err) => {
+      res.status(500).send({ error: err.message });
+    });
+  
+    // Cuando se completa el archivo ZIP, envíalo como descarga
+    res.attachment('data.zip');
+    archive.pipe(res);
+  
+    // Agrega todos los archivos .json del directorio 'data' al archivo ZIP
+    fs.readdir(path.join(__dirname, 'data'), (err, files) => {
+      if (err) {
+        res.status(500).send({ error: 'Error al leer el directorio data.' });
+        return;
+      }
+  
+      files.forEach((file) => {
+        if (path.extname(file) === '.json') {
+          archive.file(path.join(__dirname, 'data', file), { name: file });
+          //res.redirect('/private')
+        }
+      });
+  
+      archive.finalize(); // Finaliza la creación del archivo ZIP
+      
+    });
+  });
 
 
 
@@ -189,6 +222,11 @@ io.on('connection', (socket) => {
         clientes: clientestotales
     };
     socket.emit('comparacion', comparacion);
+    
+
+
+    const deudast = deudastotales.map(deuda => parseFloat(deuda.deuda)); // Convertir a números
+    socket.emit('dartotal', { deuda: deudast }); 
 });
 
 

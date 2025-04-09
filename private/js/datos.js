@@ -4,7 +4,7 @@ const Socket = io();
 
 //escuchamos las deudas y pagos
 Socket.on('comparacion', comparacion => {
-    console.log(comparacion);
+    //console.log(comparacion);
     const tbodydeudas = document.getElementById('tbody-deudas');
     const { deudas, pagos, clientes } = comparacion;
 
@@ -24,6 +24,9 @@ Socket.on('comparacion', comparacion => {
             };
         }
         resumenClientes[deuda.nombre].totalDeuda += Number(deuda.deuda);
+
+
+        
     });
 
     // Procesar pagos
@@ -73,4 +76,14 @@ buscador.addEventListener('input', () => {
     }
     );
 });
-
+//total deuda
+Socket.on('dartotal', dartotal => {
+    const etiquetatotal = document.getElementById('total-por-cobrar');
+    const deudas = dartotal.deuda;
+    let deudatotal = 0;
+    for (let deuda of deudas) {
+      deudatotal += deuda;
+    }
+    console.log(deudatotal); // Muestra la suma en la consola (opcional)
+    etiquetatotal.innerHTML = deudatotal+ '$'; // Muestra la suma en el elemento HTML
+  });
