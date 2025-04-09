@@ -10,7 +10,7 @@ const formularioDeuda = document.querySelector('#form-deuda'); // Obtener el for
 // eschuchams los usuarios registrados para el select
 socket.on('clientes', (clientes) => {
     // Aquí puedes manejar los usuarios recibidos
-    console.log('Usuarios recibidos:', clientes);
+    //console.log('Usuarios recibidos:', clientes);
     
    // select.innerHTML = ''; // Limpiar el contenido actual del select
     for (const cliente of clientes) {

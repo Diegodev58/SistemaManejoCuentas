@@ -33,7 +33,7 @@ Socket.on('pagos', (pagos) => {
        
 Socket.on('clientes', (clientes) => {
     // Aquí puedes manejar los usuarios recibidos
-    console.log('Usuarios recibidos:', clientes);
+    //console.log('Usuarios recibidos:', clientes);
     
    // select.innerHTML = ''; // Limpiar el contenido actual del select
     for (const cliente of clientes) {
@@ -66,7 +66,7 @@ formulariopago.addEventListener('submit', (e) => {
         referencia: referencia,
         descripcion: descripcion
     }
-    console.log(nuevoPago);
+    //console.log(nuevoPago);
     Socket.emit('nuevoPago', nuevoPago);
     formulariopago.reset();
     // Aquí puedes manejar la respuesta del servidor si es necesario
