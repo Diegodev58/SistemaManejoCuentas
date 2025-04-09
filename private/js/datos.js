@@ -87,3 +87,33 @@ Socket.on('dartotal', dartotal => {
     console.log(deudatotal); // Muestra la suma en la consola (opcional)
     etiquetatotal.innerHTML = deudatotal+ '$'; // Muestra la suma en el elemento HTML
   });
+
+
+Socket.on('pagost', pagost => {
+    const etiquetatotal = document.getElementById('total-pagos');
+    if (etiquetatotal) { // Verifica si el elemento existe
+      const pagos = pagost.pago;
+      let pagostotales = 0;
+      if (Array.isArray(pagos)) { // Verifica si 'pagos' es un arreglo
+        for (let pago of pagos) {
+          if (typeof pago === 'number') { // Verifica si 'pago' es un número
+            pagostotales += pago;
+          } else {
+            console.error('Valor de pago no válido:', pago);
+          }
+        }
+        etiquetatotal.innerHTML = pagostotales + '$';
+      } else {
+        console.error('Pagos no es un arreglo válido:', pagos);
+      }
+    } else {
+      console.error('Elemento con ID "total-pagos" no encontrado.');
+    }
+  });
+
+
+Socket.on('totalclientes', totalclientes => {
+    const i = totalclientes
+    const totaluser = document.getElementById('total-usuarios');
+    totaluser.innerHTML = i;
+  });
