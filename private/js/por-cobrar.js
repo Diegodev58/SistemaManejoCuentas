@@ -66,12 +66,14 @@ formularioDeuda.addEventListener('submit', (event) => {
 
     // Limpiar el formulario
     formularioDeuda.reset();
-    if (nuevaDeuda) {
-        alert('Deuda registrada con exito');
-        window.location.reload()
-    }else {
-        alert('Error al registrar la deuda');
-
-
-    }      } 
+       } 
 );
+
+socket.on('nuevaDeuda', (nuevaDeuda) => {
+    if(nuevaDeuda){
+        alert('Todo salio bien')
+        return window.location.reload()
+    }else{
+        alert('Error Hiciste algo mal')
+    }
+});

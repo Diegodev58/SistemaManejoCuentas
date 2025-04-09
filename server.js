@@ -139,13 +139,20 @@ io.on('connection', (socket) => {
     socket.on('nuevaDeuda', (nuevaDeuda) => {
         let estado;
         if (!nuevaDeuda.nombre || !nuevaDeuda.Articulos || !nuevaDeuda.Cantidad || !nuevaDeuda.precio) {
-            estado = false;
+            return  io.emit('nuevoPago', false);
         } else {
-            const deudaAgregada = deudaController.agregarDeuda(nuevaDeuda);
-            io.emit('nuevaDeuda', deudaAgregada);
-            estado = true;
+            const clientesExistentes = clienteController.leerClientes();
+            const clienteEncontrado = clientesExistentes.find((cliente) => cliente.nombre === nuevaDeuda.nombre);
+            if(clienteEncontrado){
+                const deudaAgregada = deudaController.agregarDeuda(nuevaDeuda);
+                console.log(deudaAgregada)
+                return io.emit('nuevaDeuda', true);
+            }else{
+                return io.emit('nuevaDeuda', false);
+            }
+            
         }
-        io.emit('nuevaDeuda', estado);
+        
     });
 
     // Parte de pagos
@@ -156,13 +163,20 @@ io.on('connection', (socket) => {
     socket.on('nuevoPago', (nuevoPago) => {
         let estado;
         if (!nuevoPago.nombre || !nuevoPago.pago || !nuevoPago.referencia) {
-            estado = false;
+            return io.emit('nuevoPago', false);
         } else {
-            const pagoAgregado = pagoController.agregarPago(nuevoPago);
-            io.emit('nuevoPago', pagoAgregado);
-            estado = true;
+            const clientesExistentes = clienteController.leerClientes();
+            const clienteEncontrado = clientesExistentes.find((cliente) => cliente.nombre === nuevoPago.nombre);
+            if(clienteEncontrado){
+                const pagoAgregado = pagoController.agregarPago(nuevoPago);
+                console.log(pagoAgregado)
+                return io.emit('nuevoPago', true);
+            }else{
+                return io.emit('nuevoPago', false);
+            }
+            
         }
-        io.emit('nuevoPago', estado);
+       
     });
 
     // Comparación de datos
