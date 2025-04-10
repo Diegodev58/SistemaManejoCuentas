@@ -81,3 +81,20 @@ formulariopago.addEventListener('submit', (e) => {
         }
     })
 })
+
+const buscador = document.getElementById('buscador');
+const tbodydeudas = document.getElementById('demo');
+
+buscador.addEventListener('input', () => {
+    const busqueda = buscador.value.toLowerCase();
+    const clientes = tbodydeudas.querySelectorAll('tr');
+
+    clientes.forEach(cliente => {
+        const nombre = cliente.querySelector('td').textContent.toLowerCase();
+        if (nombre.includes(busqueda)) {
+            cliente.style.display = '';
+        } else {
+            cliente.style.display = 'none';
+        }
+    }
+  )}  );

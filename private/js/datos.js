@@ -2,6 +2,15 @@
 
 const Socket = io();
 
+function verUsuario(c){
+  
+  console.log('ver '+ c.nombre )
+  
+
+}
+
+
+
 //escuchamos las deudas y pagos
 Socket.on('comparacion', comparacion => {
     //console.log(comparacion);
@@ -43,16 +52,29 @@ Socket.on('comparacion', comparacion => {
 
     // Ahora generamos las filas para cada cliente
     clientes.forEach(cliente => {
+
         if (resumenClientes[cliente.nombre]) {
             const resumen = resumenClientes[cliente.nombre];
+            const butoo = document.createElement('button');
+            butoo.id = 'btn-eliminar'; // Asignar un ID al botón
+            butoo.textContent = 'ver'; // Establecer el texto del botón
+            butoo.classList.add('btn', 'btn-danger'); // Agregar clases al botón
+            
+            butoo.addEventListener('click', () => {
+              ventanaEmergente.classList.remove('oculto');
+              verUsuario(cliente);
+
+            });
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${resumen.nombre}</td>
                 <td>${resumen.totalDeuda.toFixed(2)} $</td>
                 <td>${resumen.totalPago.toFixed(2)} $</td>
                 <td>${(resumen.totalDeuda - resumen.totalPago).toFixed(2)} $</td>
-                <td><button class="btn btn-danger" id="btn-eliminar">Ver</button></td>
+               
             `;
+
+            row.appendChild(butoo)
             tbodydeudas.appendChild(row);
         }
     });
@@ -117,3 +139,21 @@ Socket.on('totalclientes', totalclientes => {
     const totaluser = document.getElementById('total-usuarios');
     totaluser.innerHTML = i;
   });
+
+
+
+
+
+
+//ventana ermegente 
+const botonAbrir = document.getElementById('btn-eliminar');
+const ventanaEmergente = document.getElementById('ventana-emergente');
+const botonCerrar = document.querySelector('.cerrar-ventana');
+
+// Agregar el evento click al botón para mostrar la ventana emergente
+//botonAbrir
+
+// Agregar el evento click al botón de cerrar para ocultar la ventana emergente
+botonCerrar.addEventListener('click', () => {
+  ventanaEmergente.classList.add('oculto');
+});

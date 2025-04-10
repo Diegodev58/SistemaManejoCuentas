@@ -6,5 +6,13 @@
     "precio": "2.5",
     "deuda": "7.5",
     "fecha": "30/3/2025"
+  },
+  {
+    "nombre": "diego",
+    "Articulos": "perfume",
+    "Cantidad": "1",
+    "precio": "7.5",
+    "deuda": 7.5,
+    "fecha": "9/4/2025"
   }
 ]
