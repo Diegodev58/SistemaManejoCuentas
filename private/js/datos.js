@@ -2,12 +2,6 @@
 
 const Socket = io();
 
-function verUsuario(c){
-  
-  console.log('ver '+ c.nombre )
-  
-
-}
 
 
 
@@ -16,7 +10,42 @@ Socket.on('comparacion', comparacion => {
     //console.log(comparacion);
     const tbodydeudas = document.getElementById('tbody-deudas');
     const { deudas, pagos, clientes } = comparacion;
-
+    
+    
+    
+    function verUsuario(c){
+      const idR = c.nombre
+      console.log('ver '+ idR )
+      
+      
+      let hd = [];
+      
+      for(let i of deudas){
+        if(i.nombre === idR){
+          hd.push(i.Cantidad);
+          hd.push(i.precio);
+          hd.push(i.deuda);
+          hd.push(i.Articulos);
+          hd.push(i.fecha);
+        }
+        
+      }
+      let hp = [];
+      console.log(hd)
+      for(let a of pagos){
+        if(a.nombre === idR){
+          hp.push(a.pago);
+          hp.push(a.fecha);
+          hp.push(a.referencia);
+          hp.push(a.descripcion);
+      
+        }
+        
+      }
+      console.log(hp)
+    
+    }
+    
     // Limpiar el tbody antes de agregar nuevos datos
     tbodydeudas.innerHTML = '';
 
