@@ -16,21 +16,20 @@ socket.on('registro', (clientes) => {
         const tdTelefono = document.createElement('td');
         const tdReferencia = document.createElement('td');
         const tdFecha = document.createElement('td');
-        const tdAcciones = document.createElement('td');
+        const tdemail = document.createElement('td');
 
         tdNombre.textContent = datas.nombre;
         tdTelefono.textContent = datas.telefono;
         tdReferencia.textContent = datas.referencia;
         tdFecha.textContent = datas.fecha;
-        tdAcciones.innerHTML = `
-            <button class="btn btn-danger" data-id="${datas.nombre}">Eliminar</button>
-        `;
+        tdemail.textContent = datas.email;
 
         tr.appendChild(tdNombre);
         tr.appendChild(tdTelefono);
         tr.appendChild(tdReferencia);
         tr.appendChild(tdFecha);
-        tr.appendChild(tdAcciones);
+       
+        tr.appendChild(tdemail)
 
         demo.appendChild(tr);
     }
