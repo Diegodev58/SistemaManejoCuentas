@@ -14,6 +14,7 @@ Socket.on('comparacion', comparacion => {
     //etiquetas de la ventana
     const vcorreo = document.querySelector('#vcorreo')
     const vtelefono = document.querySelector('#vtelefono')
+    const vnombre = document.querySelector('#vnombre')
     function verUsuario(c){
       const idR = c.nombre
       console.log('ver '+ idR )
@@ -21,7 +22,7 @@ Socket.on('comparacion', comparacion => {
       let vdato;
       let vdatot;
       const cliente = clientes.find((cliente) => cliente.nombre === idR);
-
+      vnombre.innerHTML = 'Detalles del Usuario: ' + idR;
       if (!cliente) {
         vcorreo.innerHTML = "Cliente no encontrado";
         vtelefono.innerHTML = "";
