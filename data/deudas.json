@@ -14,5 +14,13 @@
     "precio": "7.5",
     "deuda": 7.5,
     "fecha": "9/4/2025"
+  },
+  {
+    "nombre": "Ana",
+    "Articulos": "prueba",
+    "Cantidad": "5",
+    "precio": "1.6",
+    "deuda": 8,
+    "fecha": "11/4/2025"
   }
 ]

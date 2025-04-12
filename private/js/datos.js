@@ -11,22 +11,37 @@ Socket.on('comparacion', comparacion => {
     const tbodydeudas = document.getElementById('tbody-deudas');
     const { deudas, pagos, clientes } = comparacion;
     
-    
-    
+    //etiquetas de la ventana
+    const vcorreo = document.querySelector('#vcorreo')
+    const vtelefono = document.querySelector('#vtelefono')
     function verUsuario(c){
       const idR = c.nombre
       console.log('ver '+ idR )
+      //datos de cliente
+      let vdato;
+      let vdatot;
+      const cliente = clientes.find((cliente) => cliente.nombre === idR);
+
+      if (!cliente) {
+        vcorreo.innerHTML = "Cliente no encontrado";
+        vtelefono.innerHTML = "";
+        return;
+      }
+
+      vcorreo.innerHTML = cliente.email || "No tiene correo registrado";
+      vtelefono.innerHTML = cliente.telefono || "No tiene teléfono registrado";
+
+      console.log(cliente.email || "No tiene correo registrado");
+      console.log(cliente.telefono || "No tiene teléfono registrado");
+
       
-      
-      let hd = [];
+      let hd = [{}];
       
       for(let i of deudas){
         if(i.nombre === idR){
-          hd.push(i.Cantidad);
-          hd.push(i.precio);
-          hd.push(i.deuda);
-          hd.push(i.Articulos);
-          hd.push(i.fecha);
+
+          hd.push(i.Cantidad, i.precio, i.deuda,i.Articulos, i.fecha);
+          
         }
         
       }
@@ -34,11 +49,7 @@ Socket.on('comparacion', comparacion => {
       console.log(hd)
       for(let a of pagos){
         if(a.nombre === idR){
-          hp.push(a.pago);
-          hp.push(a.fecha);
-          hp.push(a.referencia);
-          hp.push(a.descripcion);
-      
+          hp.push(a.pago,a.fecha,a.referencia,a.descripcion);
         }
         
       }
