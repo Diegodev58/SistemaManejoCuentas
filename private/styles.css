@@ -316,3 +316,14 @@ th, td {
 th {
   background-color: #f2f2f2;
 }
+
+#alert1{
+  color: red;
+  transition: 0.5s;
+  text-align: center;
+  
+}
+
+#alert1:active{
+  transform: scale(1.0.8);
+}

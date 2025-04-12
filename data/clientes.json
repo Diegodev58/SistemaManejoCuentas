@@ -38,5 +38,13 @@
     "email": "",
     "dirreccion": "",
     "fecha": "8/4/2025"
+  },
+  {
+    "nombre": "PEDRO",
+    "referencia": "DEMO",
+    "telefono": "04120000000",
+    "email": "PEDRO@EMAIL.COM",
+    "dirreccion": "demo demo",
+    "fecha": "12/4/2025"
   }
 ]
