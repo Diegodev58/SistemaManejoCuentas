@@ -23,7 +23,7 @@ Aplicación web para gestión de cuentas por cobrar que permite:
 - Socket.IO Client
 
 ### Base de Datos
-- Sistema de archivos JSON (sin necesidad de DB externa) (se recomienda usar una base de db)
+- Sistema de archivos JSON (sin necesidad de DB externa) (se recomienda usar una base de db) ya los modelos para mongodb esta plasmado en el codigo.
 
 
 
