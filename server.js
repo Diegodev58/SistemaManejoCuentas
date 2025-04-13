@@ -63,6 +63,10 @@ app.get('/private/registro.html/*', Userautenticado, (req, res) => {
   res.sendFile(path.join(__dirname, 'private', 'registro.html')); // Página de registro
 });
 
+app.get('/private/ver', Userautenticado, (req, res) => {
+  res.sendFile(path.join(__dirname, 'private',  'ver.html')); // Página principal privada
+});
+
 app.get('/private/deudas.html/*', Userautenticado, (req, res) => {
   res.sendFile(path.join(__dirname, 'private', 'deudas.html')); // Página de deudas
 });
