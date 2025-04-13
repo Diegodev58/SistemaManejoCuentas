@@ -14,7 +14,7 @@ const pagoController = require('./controllers/pagoController'); // Controlador d
 const { login } = require('./controllers/validar_user'); // Función de login
 const Userautenticado = require('./middlewares/authentication'); // Middleware de autenticación
 const cookieParser = require('cookie-parser'); // Middleware para manejar cookies
-const {calcularDeudaTotal, validartodo , estadoOperacion, mensajeA,} = require('./middlewares/validardatos')
+const {calcularDeudaTotal, validarpagomonto , datoinicial, mensajeA, validartodo,} = require('./middlewares/validardatos')
 // Configuración inicial de Express
 const router = express.Router(); // Crear un enrutador (aunque no se usa directamente)
 const dotenv = require('dotenv'); // Para cargar variables de entorno
@@ -176,14 +176,18 @@ io.on('connection', (socket) => {
   const pagos = pagoController.leerPagos();
   socket.emit('pagos', pagos); // Enviar lista de pagos
 
-  socket.on('nuevoPago', (nuevoPago) => {
-    validartodo(nuevoPago)
-    
-    
-    return io.emit('nuevoPago', estadoOperacion,); // Cliente no encontrado
-    
-    
-  });
+  socket.on('nuevoPago', async (nuevoPago) => {
+    try {
+        await validartodo(nuevoPago);
+        await io.emit('nuevoPago', mensajeA);
+        await mensajeA.splice(0, mensajeA.length)
+        await mensajeA.push(datoinicial);
+        
+    } catch (error) {
+        console.error('Error en la validación:', error);
+        io.emit('nuevoPago', 'Error en la validación');
+    }
+});
 
   // DATOS COMPARATIVOS
   const pagostotales = pagoController.leerPagos();
