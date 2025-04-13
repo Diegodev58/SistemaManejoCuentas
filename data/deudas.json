@@ -30,5 +30,117 @@
     "precio": "7.5",
     "deuda": 37.5,
     "fecha": "12/4/2025"
+  },
+  {
+    "nombre": "diego",
+    "Articulos": "prueba",
+    "Cantidad": "1",
+    "precio": "10",
+    "deuda": 10,
+    "fecha": "12/4/2025"
+  },
+  {
+    "nombre": "Ana",
+    "Articulos": "prueba",
+    "Cantidad": "1",
+    "precio": "2",
+    "deuda": 2,
+    "fecha": "12/4/2025"
+  },
+  {
+    "nombre": "diego",
+    "Articulos": "prueba",
+    "Cantidad": "5",
+    "precio": "1",
+    "deuda": 5,
+    "fecha": "12/4/2025"
+  },
+  {
+    "nombre": "ILIANA",
+    "Articulos": "prueba",
+    "Cantidad": "5",
+    "precio": "5",
+    "deuda": 25,
+    "fecha": "12/4/2025"
+  },
+  {
+    "nombre": "Ana",
+    "Articulos": "prueba",
+    "Cantidad": "4",
+    "precio": "5",
+    "deuda": 20,
+    "fecha": "12/4/2025"
+  },
+  {
+    "nombre": "Ana",
+    "Articulos": "prueba",
+    "Cantidad": "4",
+    "precio": "4",
+    "deuda": 16,
+    "fecha": "12/4/2025"
+  },
+  {
+    "nombre": "MARIA",
+    "Articulos": "prueba",
+    "Cantidad": "4",
+    "precio": "5",
+    "deuda": 20,
+    "fecha": "12/4/2025"
+  },
+  {
+    "nombre": "yane",
+    "Articulos": "prueba",
+    "Cantidad": "7",
+    "precio": "5",
+    "deuda": 35,
+    "fecha": "12/4/2025"
+  },
+  {
+    "nombre": "yane",
+    "Articulos": "prueba",
+    "Cantidad": "1",
+    "precio": "2",
+    "deuda": 2,
+    "fecha": "12/4/2025"
+  },
+  {
+    "nombre": "diego",
+    "Articulos": "prueba",
+    "Cantidad": "5",
+    "precio": "5",
+    "deuda": 25,
+    "fecha": "12/4/2025"
+  },
+  {
+    "nombre": "diego",
+    "Articulos": "prueba",
+    "Cantidad": "1",
+    "precio": "1",
+    "deuda": 1,
+    "fecha": "12/4/2025"
+  },
+  {
+    "nombre": "diego",
+    "Articulos": "prueba",
+    "Cantidad": "1",
+    "precio": "1",
+    "deuda": 1,
+    "fecha": "12/4/2025"
+  },
+  {
+    "nombre": "diego",
+    "Articulos": "prueba",
+    "Cantidad": "1",
+    "precio": "1",
+    "deuda": 1,
+    "fecha": "12/4/2025"
+  },
+  {
+    "nombre": "diego",
+    "Articulos": "prueba",
+    "Cantidad": "1",
+    "precio": "1",
+    "deuda": 1,
+    "fecha": "12/4/2025"
   }
 ]

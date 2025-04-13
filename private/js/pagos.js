@@ -71,14 +71,10 @@ formulariopago.addEventListener('submit', (e) => {
     formulariopago.reset();
     // Aquí puedes manejar la respuesta del servidor si es necesario
     Socket.on('nuevoPago', (estado) => {
-        if(estado){
-            console.log('Pago agregado');
-            alert('Pago agregado');
+        
+            alert(estado);
             window.location.reload()
-        }else{
-            console.log('Error al agregar el pago');
-            alert('Error al agregar el pago');
-        }
+       
     })
 })
 

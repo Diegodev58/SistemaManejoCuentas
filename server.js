@@ -14,7 +14,7 @@ const pagoController = require('./controllers/pagoController'); // Controlador d
 const { login } = require('./controllers/validar_user'); // Función de login
 const Userautenticado = require('./middlewares/authentication'); // Middleware de autenticación
 const cookieParser = require('cookie-parser'); // Middleware para manejar cookies
-
+const {calcularDeudaTotal, validartodo , estadoOperacion, mensajeA,} = require('./middlewares/validardatos')
 // Configuración inicial de Express
 const router = express.Router(); // Crear un enrutador (aunque no se usa directamente)
 const dotenv = require('dotenv'); // Para cargar variables de entorno
@@ -152,8 +152,10 @@ io.on('connection', (socket) => {
   // DEUDAS
   const deudas = deudaController.leerDeudas();
   socket.emit('deudas', deudas); // Enviar lista de deudas
-
+  
+  
   socket.on('nuevaDeuda', (nuevaDeuda) => {
+    
     if (!nuevaDeuda.nombre || !nuevaDeuda.Articulos || !nuevaDeuda.Cantidad || !nuevaDeuda.precio) {
       return io.emit('nuevoPago', false); // Validación fallida
     } else {
@@ -175,19 +177,12 @@ io.on('connection', (socket) => {
   socket.emit('pagos', pagos); // Enviar lista de pagos
 
   socket.on('nuevoPago', (nuevoPago) => {
-    if (!nuevoPago.nombre || !nuevoPago.pago || !nuevoPago.referencia) {
-      return io.emit('nuevoPago', false); // Validación fallida
-    } else {
-      const clientesExistentes = clienteController.leerClientes();
-      const clienteEncontrado = clientesExistentes.find((cliente) => cliente.nombre === nuevoPago.nombre);
-      
-      if(clienteEncontrado){
-        const pagoAgregado = pagoController.agregarPago(nuevoPago);
-        return io.emit('nuevoPago', true); // Operación exitosa
-      }else{
-        return io.emit('nuevoPago', false); // Cliente no encontrado
-      }
-    }
+    validartodo(nuevoPago)
+    
+    
+    return io.emit('nuevoPago', estadoOperacion,); // Cliente no encontrado
+    
+    
   });
 
   // DATOS COMPARATIVOS
