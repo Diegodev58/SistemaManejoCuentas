@@ -17,13 +17,13 @@
       
       
      
-    const datosdb = JSON.parse(localStorage.getItem('datosdb')); // O sessionStorage.getItem(...)
+     const datosdb = JSON.parse(localStorage.getItem('datosdb')); // O sessionStorage.getItem(...)
        
-    
+      const x = d - p;  
 
 
       vtotalp.innerHTML = 'Total Pagado: ' + p + '$'
-      vtotald.innerHTML = 'Total Deuda: ' + d + '$'
+      vtotald.innerHTML = 'Total Deuda: ' + x + '$'
 
       if(p > d){
         alert1.innerHTML = 'El monto del pago no puede ser mayor que la deuda pendiente. Por favor, verifica el monto ingresado y realiza el pago correcto. Si crees que hay un error en el sistema, no dudes en contactar al contador o al administrador web. '
